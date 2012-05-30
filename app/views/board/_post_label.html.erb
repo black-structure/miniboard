@@ -1,0 +1,11 @@
+<label>
+  <span class="filetitle"> <%=post.subject%> </span>
+  <span class="postername">
+    <% if(post.postername) %>
+      <%=post.postername%>
+    <% else %>
+      <%=post.board.postername_default%>
+    <% end %>
+  </span>
+  <%=post.time.to_s%>
+</label>

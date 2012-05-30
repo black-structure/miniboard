@@ -1,0 +1,25 @@
+<div class="postarea">
+<%= simple_form_for @post, :url => board_form_url do |f| %>
+  <%= f.error_notification %>
+  <table class="postform">
+  	<tbody>
+  	<tr>
+  	  <td class="postblock">Name:</td> 
+      <td><%= f.text_field :postername	 %> <%= f.submit 'Send' %></td>
+    </tr>
+    <tr>
+  	  <td class="postblock">Subject:</td> 
+      <td><%= f.text_field :subject %> <%= f.submit 'Send' %></td>
+    </tr>
+    <tr>
+  	  <td class="postblock">Message</td> 
+      <td><%= f.text_area :body %></td>
+    </tr>
+    <tr>
+  	  <td class="postblock">File</td> 
+      <td><%= f.file_field :file %></td>
+    </tr>
+  </tbody>
+  </table>
+<% end %>
+</div>

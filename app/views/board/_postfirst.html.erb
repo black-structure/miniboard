@@ -1,0 +1,14 @@
+<div class="postnode">
+  <%= render :partial => 'post_filesize', :locals => { post: post } %>
+  <%= render :partial => 'post_thumb', :locals => { post: post } %>
+  <%= render :partial => 'post_label', :locals => { post: post } %>
+  <%= render :partial => 'post_reflink', :locals => { post: post } %>
+  
+  <% if(!defined? @thrd) %>
+  [ <%=link_to('Reply', board_thread_url(thrd: post.thrd))%> ]
+  <% end %>
+  
+  <blockquote>
+    <%= content_tag(:div, post.body, :class => 'postmessage')%>
+  </blockquote>
+</div>

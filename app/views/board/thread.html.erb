@@ -1,0 +1,9 @@
+<div class="logo">/<%= @board.name %>/ - <%= @board.description %></div>
+<hr>
+[<%=link_to 'Return', board_index_url %>]
+<div class="replymode">Reply</div>
+<%= render 'form' %>
+<hr>
+<%= render :partial => 'postfirst', :locals => { post: @first } %>
+<%= @posts.map{|post| render :partial => 'post', :locals => { post: post } }.join.html_safe %>
+<hr>

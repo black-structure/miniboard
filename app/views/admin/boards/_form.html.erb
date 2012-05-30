@@ -1,0 +1,32 @@
+<%= simple_form_for(@board) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+  	<table>
+  	  <tr>
+  	    <td>Name</td>
+  	    <td><%= f.text_field :name %></td>
+  	  </tr>
+  	  <tr>
+  	    <td>Description</td>
+  	    <td><%= f.text_field :description %></td>
+  	  </tr>
+  	  <tr>
+  	    <td>Default poster name</td>
+  	    <td><%= f.text_field :postername_default %></td>
+  	  </tr>
+  	  <tr>
+  	    <td>Threads per page</td>
+  	    <td><%= f.number_field :perpage %></td>
+  	  </tr>
+  	  <tr>
+  	    <td>Max threads</td>
+  	    <td><%= f.number_field :maxthrds %></td>
+  	  </tr>
+  	</table>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

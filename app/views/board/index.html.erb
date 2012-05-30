@@ -1,0 +1,34 @@
+<div class="logo">/<%= @board.name %>/ - <%= @board.description %></div>
+<hr>
+<%= render 'form' %>
+<hr>
+<% @page.each do |n,node| %>
+<div id="thread_<%=n%>" class="postnode">
+  <%= render :partial => 'postfirst', :locals => { post: node[:first] } %>
+  	
+  <% node[:replies].each do |post| %>
+  <%= render :partial => 'post', :locals => { post: post } %>
+  <% end %>
+</div>
+<hr>
+<% end %>
+
+<% if @page.prev? %>
+  <%= link_to("Prev", board_index_url(:page => @page.prev.number)) %>
+<% else %>
+  Prev
+<% end %>
+
+<% @pager.each do |page| %>
+  <% if @page.number != page.number %>
+    <%= link_to(page.number, board_index_url(:page => page.number)) %>
+  <% else %>
+  	<%= link_to(page.number, board_index_url(:page => page.number), style: 'font-weight: bold') %>
+  <% end %>
+<% end %>
+
+<% if @page.next? %>
+  <%= link_to("Next", board_index_url(:page => @page.next.number)) %>
+<% else %>
+  Next
+<% end %>

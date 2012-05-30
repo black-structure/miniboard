@@ -1,0 +1,21 @@
+<h1>Listing admin_boards</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @boards.each do |board| %>
+  <tr>
+    <td><%= link_to 'Show', board %></td>
+    <td><%= link_to 'Edit', edit_admin_board_path(board) %></td>
+    <td><%= link_to 'Destroy', board, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Board', new_admin_board_path %>

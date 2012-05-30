@@ -1,0 +1,7 @@
+<% if(post.file?) %>
+<a href="<%=post.file.url%>">
+  <span id="thumb<%=post.number%>">
+  	<%= image_tag(post.file.thumb.url, :class=>"thumb", :alt=>post.number) %>
+  </span>
+</a>
+<% end %>
