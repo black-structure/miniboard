@@ -1,0 +1,30 @@
+<%= simple_form_for(@user) do |f| %>
+  <div class="form-inputs">
+  	<table>
+  	  <tr>
+  	    <td>Username</td>
+  	    <td>
+  	      <%= f.text_field :username %>
+  	      <span style="color:red"><%= f.error :username, :id => 'username_error' %></span>
+  	    </td>
+  	  </tr>
+  	  <tr>
+  	    <td>Password</td>
+  	    <td>
+  	      <%= f.password_field :password %>
+  	      <span style="color:red"><%= f.error :password, :id => 'password_error' %></span>
+  	    </td>
+  	  </tr>
+  	  <tr>
+  	    <td>Confirmation</td>
+  	    <td>
+  	      <%= f.password_field :password_confirmation %>
+  	    </td>
+  	  </tr>
+  	</table>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
