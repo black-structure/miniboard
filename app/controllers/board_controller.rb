@@ -1,8 +1,12 @@
 class BoardController < ApplicationController
   
+  
   helper_method :board_index_url, :board_thread_url
+  before_filter :init_board
   
   # some shared helpers
+  
+  protected
   
   def board_index_url(opts={})
     if(opts.include? :page)
@@ -23,20 +27,15 @@ class BoardController < ApplicationController
     end
   end
   
-  # custom collection names
-  
-  def init_stores
+  def init_board
     @board = Board.first(conditions: {name: params[:board]})
-    
-    Post.init(@board)
-    Thrd.init(@board)
   end
+  
+  public
   
   # controllers
   
   def index
-    init_stores
-    
     @post = Post.new
     
     @pager = ::Paginator.new(Thrd.count, @board.perpage) do |offset, per_page|
@@ -61,8 +60,6 @@ class BoardController < ApplicationController
   end
 
   def thread
-    init_stores
-    
     @post = Post.new
     
     @thrd = Thrd.first(conditions: { number: params[:thrd] })
@@ -75,8 +72,6 @@ class BoardController < ApplicationController
   end
   
   def new_post
-    init_stores
-    
     @thrd = Thrd.first(conditions: { number: params[:thrd] })
     
     fields = params[:post].clone
@@ -97,8 +92,6 @@ class BoardController < ApplicationController
   end
   
   def new_thread
-    init_stores
-    
     fields = params[:post].clone
     fields[:number] = @board.inc_number
     fields[:board] = @board

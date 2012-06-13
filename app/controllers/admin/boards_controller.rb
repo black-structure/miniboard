@@ -1,5 +1,5 @@
-class Admin::BoardsController < ApplicationController
-  
+class Admin::BoardsController < AdminController
+  load_and_authorize_resource
   
   def board_url(x=nil)
     admin_board_url x

@@ -1,7 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   
-  def hmm
-    @board
-  end
+  #private
+  #def current_user
+  #  session[:current_user]
+  #end
 end

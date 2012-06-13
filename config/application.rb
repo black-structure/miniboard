@@ -51,6 +51,7 @@ module Miniboard
     
     config.generators do |g|
       g.stylesheets false
+      # 
     end
   end
 end

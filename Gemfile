@@ -5,12 +5,18 @@ gem 'rails', '3.2.3'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
+# gem 'factory_girl_rails'
+
 gem 'mongoid', '~> 2.4'
 gem 'bson_ext', '~> 1.5'
 
 # gem 'mongoid-paperclip', :require => 'mongoid_paperclip'
 gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
 gem 'mini_magick'
+
+gem 'devise'
+gem 'role_model'
+gem 'cancan'
 
 gem 'simple_form'
 gem 'paginator'
