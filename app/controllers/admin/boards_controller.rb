@@ -64,12 +64,7 @@ class Admin::BoardsController < AdminController
   def update
     @board = Board.find(params[:id])
     
-    Thrd.init(@board)
-    Post.init(@board)
-    
     fields = params[:board]
-    
-    # Mongoid.database.rename_collection("yoba_threads","fuuuuuuuu_posts")
     
     respond_to do |format|
       if @board.update_attributes(fields)
