@@ -1,0 +1,5 @@
+<h1>Minimalistic imageboard!</h1>
+
+<% @boards.each do |board| %>
+  <%= link_to(board.name, "boards/#{board.name}") %><br>
+<%end%>
