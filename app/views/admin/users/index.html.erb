@@ -1,4 +1,4 @@
-<h1>Listing users</h1>
+<h1>Users</h1>
 
 <table>
   <tr>
@@ -9,8 +9,13 @@
 
 <% @users.each do |user| %>
   <tr>
-    <td><%= link_to 'Show', user %></td>
-    <td><%= link_to 'Edit', edit_user_path(user) %></td>
+    <td><%= user.username %></td>
+    <td>
+      <% if user.has_role?(:admin) %>
+        (admin)
+      <% end%>
+    </td>
+    <td><%= link_to 'Edit', edit_admin_user_path(user) %></td>
     <td><%= link_to 'Destroy', user, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
