@@ -16,8 +16,8 @@ Miniboard::Application.routes.draw do
                         :sign_up => 'register',
                         :registration => 'r' }
 
-  match 'boards/:board(/:page)' => 'board#index', :constraints => { board: /[A-Za-z0-9]+/, page: /\d+/ }
-  match 'boards/:board/res/:thrd' => 'board#thread', :constraints => { board: /[A-Za-z0-9]+/, thrd: /\d+/ }
+  match 'boards/:board' => 'board#index', :constraints => { board: /[A-Za-z0-9]+/ }
+  match 'boards/:board/:thrd' => 'board#thread', :constraints => { board: /[A-Za-z0-9]+/, thrd: /\d+/ }
   
   match 'boards/:board/new' => 'board#new_thread', :constraints => { :board => /[A-Za-z0-9]+/ }
   match 'boards/:board/:thrd/new' => 'board#new_post', :constraints => { :board => /[A-Za-z0-9]+/, :thrd => /\d+/ }
