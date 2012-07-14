@@ -3,23 +3,27 @@
   <%= f.error_notification %>
   <table class="postform">
   	<tbody>
-  	<tr>
-  	  <td class="postblock">Name:</td> 
-      <td><%= f.text_field :postername %>
-    </tr>
-    <tr>
-  	  <td class="postblock">Subject:</td> 
-      <td><%= f.text_field :subject %> <%= f.submit 'Send' %></td>
-    </tr>
-    <tr>
-  	  <td class="postblock">Message</td> 
-      <td><%= f.text_area :body %></td>
-    </tr>
-    <tr>
-  	  <td class="postblock">File</td> 
-      <td><%= f.file_field :file %></td>
-    </tr>
-  </tbody>
+      <tr>
+        <td class="postblock">Sage</td>
+        <td><%= f.check_box :sage %>
+      </tr>
+  	  <tr>
+  	    <td class="postblock">Name:</td> 
+        <td><%= f.text_field :postername %>
+      </tr>
+      <tr>
+        <td class="postblock">Subject:</td> 
+        <td><%= f.text_field :subject %> <%= f.submit 'Send' %></td>
+      </tr>
+      <tr>
+        <td class="postblock">Message</td> 
+        <td><%= f.text_area :body %></td>
+      </tr>
+      <tr>
+        <td class="postblock">File</td> 
+        <td><%= f.file_field :file %></td>
+      </tr>
+    </tbody>
   </table>
 <% end %>
 </div>

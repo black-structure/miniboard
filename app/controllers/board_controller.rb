@@ -1,31 +1,5 @@
 class BoardController < ApplicationController
-  
-  
-  helper_method :board_index_url, :board_thread_url
   before_filter :init_board
-  
-  # some shared helpers
-  
-  protected
-  
-  def board_index_url(opts={})
-    if(opts.include? :page)
-      "/#{@board.name}/#{opts[:page]}.html"
-    else
-      "/#{@board.name}"
-    end
-  end
-  
-  def board_thread_url(opts={})
-    if(opts.include? :thrd)
-      "/#{@board.name}/res/#{opts[:thrd].number}.html"
-    elsif(defined? @thrd)
-      "/#{@board.name}/res/#{@thrd.number}.html"
-    else
-      # TODO: raise exception
-      "/#{@board.name}"
-    end
-  end
   
   def init_board
     @board = Board.first(conditions: {name: params[:board]})

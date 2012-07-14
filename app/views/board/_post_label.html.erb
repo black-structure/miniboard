@@ -1,7 +1,7 @@
 <label>
   <span class="filetitle"> <%=post.subject%> </span>
   <span class="postername">
-    <% if(post.postername) %>
+    <% if(!post.postername.empty?) %>
       <%=post.postername%>
     <% else %>
       <%=post.board.postername_default%>
