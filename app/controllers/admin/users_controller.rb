@@ -70,12 +70,7 @@ class Admin::UsersController < AdminController
   def update
     @user = User.find(params[:id])
     
-    Thrd.init(@user)
-    Post.init(@user)
-    
     fields = params[:user]
-    
-    # Mongoid.database.rename_collection("yoba_threads","fuuuuuuuu_posts")
     
     respond_to do |format|
       if @user.update_attributes(fields)
