@@ -14,7 +14,7 @@ class BoardController < ApplicationController
     
     @pager = ::Paginator.new(Thrd.count, @board.perpage) do |offset, per_page|
       nodes = {}
-      Thrd.desc(:last_time).skip(offset).limit(per_page).each do |thrd|
+      @board.thrds.desc(:last_time).skip(offset).limit(per_page).each do |thrd|
         posts = thrd.posts.desc(:number)
         first = posts.last
         nodes[thrd.number] = {
@@ -52,7 +52,7 @@ class BoardController < ApplicationController
     fields[:number] = @board.inc_number
     fields[:board] = @board
     
-    if(@thrd)
+    if(!@thrd.nil?)
       post = Post.create!(fields)
       @thrd.posts << post
       if(!post.read_attribute(:sage))
@@ -71,9 +71,9 @@ class BoardController < ApplicationController
     fields[:board] = @board
     
     @post = Post.create!(fields)
-    Thrd.create!(:posts => [@post], :board => @board, :number => @post.number) do |thrd|
-      thrd.bump!(@post)
-    end
+    thrd = Thrd.create!(:posts => [@post], :board => @board, :number => @post.number)
+    @board.thrds << thrd
+    thrd.bump!(@post)
     
     redirect_to board_index_url
   end
