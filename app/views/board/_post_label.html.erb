@@ -1,7 +1,6 @@
 <label>
-  <span class="filetitle"> <%=post.subject%> </span>
-  <span class="postername">
-    <%= postername(post) %>
-  </span>
+  <input type="checkbox" name="delete" value="<%=post.number%>">
+  <span class="filetitle"><%=post.subject%></span>
+  <span class="postername"><%=postername(post)%></span>
   <%= format_date(post.time) %>
 </label>
