@@ -9,7 +9,8 @@ class Post
   field :subject, type: String
   field :body, type: String
   field :time, type: DateTime
-  field :sage, type: Boolean
+  field :sage, type: Boolean, default: false
+
   mount_uploader :file, PostImageUploader
   
   index [ [:'board.name', Mongo::ASCENDING], [:number, Mongo::ASCENDING] ], unique: true
