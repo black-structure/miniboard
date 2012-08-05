@@ -1,11 +1,7 @@
 <label>
   <span class="filetitle"> <%=post.subject%> </span>
   <span class="postername">
-    <% if(!post.postername.empty?) %>
-      <%=post.postername%>
-    <% else %>
-      <%=post.board.postername_default%>
-    <% end %>
+    <%= postername(post) %>
   </span>
-  <%=post.time.to_s%>
+  <%= format_date(post.time) %>
 </label>

@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   
-  helper_method :board_index_url, :board_thread_url # some shared helpers
+  helper_method :board_index_url, :board_thread_url, :format_date # some shared helpers
   
   protected
   
@@ -26,6 +26,10 @@ class ApplicationController < ActionController::Base
       # TODO: raise exception
       "/boards/#{board.name}"
     end
+  end
+
+  def format_date(date)
+    date.to_s
   end
 
 end

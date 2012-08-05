@@ -24,4 +24,9 @@ module BoardHelper
       "/boards/#{board.name}/#{@thrd.number}/new"
     end
   end
+
+  def postername(post)
+    name = if !post.postername.empty? then post.postername else post.board.postername_default end
+    if post.sage then link_to(name, 'mailto:sage') else name end
+  end
 end
