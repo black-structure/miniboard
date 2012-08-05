@@ -10,7 +10,7 @@ class PostImageUploader < CarrierWave::Uploader::Base
   storage :file
 
   def store_dir
-    "#{model.board.name}/res//#{model.id}"
+    "files/#{model.board.name}/#{model.number}"
   end
 
   version :thumb do
