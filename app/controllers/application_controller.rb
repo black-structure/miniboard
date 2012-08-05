@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
     board = (opts.include? :board) ? opts[:board] : @board
 
     if(opts.include? :page)
-      "/boards/#{board.name}/#{opts[:page]}"
+      "/boards/#{board.name}/page#{opts[:page]}"
     else
       "/boards/#{board.name}"
     end
