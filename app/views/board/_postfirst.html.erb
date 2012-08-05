@@ -1,6 +1,8 @@
 <div class="postnode">
-  <%= render :partial => 'post_filesize', :locals => { post: post } %>
-  <%= render :partial => 'post_thumb', :locals => { post: post } %>
+  <% if post.file? %>
+    <%= render :partial => 'post_filesize', :locals => { post: post } %><br>
+    <%= render :partial => 'post_thumb', :locals => { post: post } %>
+  <% end %>
   <%= render :partial => 'post_label', :locals => { post: post } %>
   <%= render :partial => 'post_reflink', :locals => { post: post } %>
   

@@ -1,1 +1,3 @@
-<span class="filesize"></span>
+<span class="filesize">
+  File: <%= link_to(post.file.file.filename, post.file.url, target: '_blank') %> - (<%=format_filesize(post.file_size)%>, <%=post.image_width%>x<%=post.image_height%>)
+</span>
