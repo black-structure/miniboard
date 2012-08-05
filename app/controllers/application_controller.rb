@@ -1,7 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   
-  helper_method :board_index_url, :board_thread_url, :format_date # some shared helpers
+  helper_method :board_index_url, :board_thread_url, # some shared helpers
+                :format_date, :format_filesize
   
   protected
   
@@ -30,6 +31,14 @@ class ApplicationController < ActionController::Base
 
   def format_date(date)
     date.to_s
+  end
+
+
+  def format_filesize(size)
+    units = %w{B KB MB GB TB}
+    e = (Math.log(size)/Math.log(1024)).floor
+    s = "%.3f" % (size.to_f / 1024**e)
+    s.sub(/\.?0*$/, units[e])
   end
 
 end
