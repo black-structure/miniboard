@@ -14,7 +14,7 @@ class Thrd
   end
   
   def bump!(post)
-    update_attribute(:last_time, post.time)
+    update_attribute(:last_time, post.created_at)
   end
   
   store_in :threads
