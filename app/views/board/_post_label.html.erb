@@ -2,5 +2,5 @@
   <input type="checkbox" name="delete" value="<%=post.number%>">
   <span class="filetitle"><%=post.subject%></span>
   <span class="postername"><%=postername(post)%></span>
-  <%= format_date(post.time) %>
+  <%= format_date(post.created_at) %>
 </label>
