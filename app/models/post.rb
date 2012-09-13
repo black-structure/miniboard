@@ -30,10 +30,8 @@ class Post
   def update_fileinfo
     if self.file?
       self.file_size ||= file.size
-      if !self.image_width || self.image_height
-        self.image_width ||= image['width']
-        self.image_height ||= image['height']
-      end
+      self.image_width ||= image['width']
+      self.image_height ||= image['height']
     end
   end
 
