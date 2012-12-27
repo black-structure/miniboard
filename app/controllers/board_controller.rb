@@ -93,7 +93,7 @@ class BoardController < ApplicationController
     if params[:post_id]
       params[:post_id].each do |number|
         post = Post.where(board: @board, number: number).first
-        if post && post.password == params[:postpassword]
+        if post && !post.password.empty? && post.password == params[:postpassword]
           post.destroy
         end
       end
