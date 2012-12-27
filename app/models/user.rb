@@ -9,9 +9,9 @@ class User
   field :roles_mask, :default => 1 # only anonymous 'guest' by default
 
   ## Database authenticatable
-  field :username,            :type => String, :null => false, :default => ""
-  field :encrypted_password,  :type => String, :null => false, :default => ""
-  index :username,            :unique => true
+  field :username,            :type => String, :default => ""
+  field :encrypted_password,  :type => String, :default => ""
+  index({ username: 1 }, { name: 'index_user_username', unique: true })
   
   ## Validators
   validates_uniqueness_of   :username

@@ -10,7 +10,7 @@ class Board
   field :perpage, type: Integer, default: 15
   field :maxthrds, type: Integer, default: 60
   
-  index :name, unique: true
+  index({ name: 1 }, { name: 'index_board_name', unique: true })
   
   validates_presence_of :name
   

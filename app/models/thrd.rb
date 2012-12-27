@@ -6,8 +6,8 @@ class Thrd
   
   field :number, type: Integer
   field :last_time, type: DateTime
-  
-  index [ [:'board.name', Mongo::ASCENDING], [:number, Mongo::ASCENDING] ], unique: true
+
+  index({ board: 1, number: 1 }, { unique: true })
   
   def count
     posts.count
@@ -17,5 +17,5 @@ class Thrd
     update_attribute(:last_time, post.created_at)
   end
   
-  store_in :threads
+  store_in collection: 'threads'
 end
