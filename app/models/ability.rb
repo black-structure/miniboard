@@ -10,7 +10,7 @@ class Ability
     
     if user.has_role? :guest
       can :read, Post
-      can :write, Post
+      can :create, Post
     end
     
     if user.has_role? :moderator
