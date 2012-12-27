@@ -1,8 +1,16 @@
 class BoardController < ApplicationController
   before_filter :init_board
+  before_filter :init_thrd, :only => [:thread, :new_post]
   
   def init_board
-    @board = Board.first(conditions: {name: params[:board]})
+    @board = Board.where(name: params[:board]).first
+  end
+
+  def init_thrd
+    @thrd = @board.thrds.where(number: params[:thrd]).first
+    if !@thrd
+      raise "thread `#{params[:thrd]}` not found"
+    end
   end
   
   public
@@ -10,7 +18,7 @@ class BoardController < ApplicationController
   # controllers
   
   def index
-    @post = Post.new
+    @post = Post.new(empty: true)
     
     @pager = ::Paginator.new(Thrd.count, @board.perpage) do |offset, per_page|
       nodes = {}
@@ -34,9 +42,13 @@ class BoardController < ApplicationController
   end
 
   def thread
-    @post = Post.new
+    @post = Post.new(empty: true)
     
-    @thrd = Thrd.first(conditions: { number: params[:thrd] })
+    @thrd = @board.thrds.where(number: params[:thrd]).first
+    if !@thrd
+      raise "thread `#{params[:thrd]}` not found"
+    end
+
     @posts = @thrd.posts.asc(:number).collect{|x| x}
     @first = @posts.slice!(0)
     
@@ -46,20 +58,15 @@ class BoardController < ApplicationController
   end
   
   def new_post
-    @thrd = Thrd.first(conditions: { number: params[:thrd] })
-    
+
     fields = params[:post].clone
     fields[:number] = @board.inc_number
     fields[:board] = @board
-    
-    if(!@thrd.nil?)
-      post = Post.create!(fields)
-      @thrd.posts << post
-      if(!post.read_attribute(:sage))
-        @thrd.bump!(post)
-      end
-    else
-      raise "thread `#{params[:thrd]}` not found"
+
+    post = Post.create!(fields)
+    @thrd.posts << post
+    if(!post.read_attribute(:sage))
+      @thrd.bump!(post)
     end
     
     redirect_to board_thread_url
@@ -76,5 +83,22 @@ class BoardController < ApplicationController
     thrd.bump!(@post)
     
     redirect_to board_index_url
+  end
+
+  def delete
+    if params.include? :thrd
+      @thrd = @board.thrds.where(number: params[:thrd]).first
+    end
+
+    if params[:post_id]
+      params[:post_id].each do |number|
+        post = Post.where(board: @board, number: number).first
+        if post && post.password == params[:postpassword]
+          post.destroy
+        end
+      end
+    end
+
+    redirect_to @thrd ? board_thread_url : board_index_url
   end
 end
