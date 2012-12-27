@@ -3,3 +3,8 @@
 *.swo
 
 public/files
+
+# Ignore all logfiles and tempfiles.
+/log/*.log
+/tmp
+
