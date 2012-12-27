@@ -1,2 +1,8 @@
-
-yoba
+<h2>You can:</h2>
+<ul>
+  <li><%= link_to 'Edit boards', boards_path %>
+  <li><%= link_to 'Edit users', users_path %>
+  <li><%= link_to 'Sign out', destroy_user_session_path, :method => :delete %>
+</ul>
+<%= current_user.roles.to_a.join(',') %>
+<%= @b1 %>

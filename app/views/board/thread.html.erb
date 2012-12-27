@@ -4,6 +4,26 @@
 <div class="replymode">Reply</div>
 <%= render 'form' %>
 <hr>
-<%= render :partial => 'postfirst', :locals => { post: @first } %>
-<%= @posts.map{|post| render :partial => 'post', :locals => { post: post } }.join.html_safe %>
+<%= form_tag(board_delform_url, :method => :delete) do %>
+  <%= render :partial => 'postfirst', :locals => { post: @first } %>
+  <%= @posts.map{|post| render :partial => 'post', :locals => { post: post } }.join.html_safe %>
+  <table class="userdelete">
+    <tbody>
+    <tr>
+    <td>
+      Delete message [
+      <%= check_box_tag 'fileonly', 'on' %>
+      <%= label_tag 'fileonly', 'Only file' %>
+      ]
+      <br>
+      Password
+      <%= password_field_tag 'postpassword', '', :size => 8 %>
+      &nbsp;
+      <%= submit_tag 'Delete', :name => 'deletepost' %>
+      <%= submit_tag 'Report', :name => 'reportpost' %>
+    </td>
+    </tr>
+    </tbody>
+  </table>
+<% end %>
 <hr>

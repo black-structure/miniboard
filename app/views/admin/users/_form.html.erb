@@ -21,6 +21,14 @@
   	      <%= f.password_field :password_confirmation %>
   	    </td>
   	  </tr>
+      <tr>
+        <td>Roles</td>
+        <td>
+          <% for role in [:admin, :moderator] %>
+            <%= check_box_tag "user[roles][#{role}]", role, @user.roles.include?(role), {:name => "user[roles][]"}%>
+            <%= label_tag "user_roles_#{role}", role.to_s %><br />
+          <% end %>
+        </td>
   	</table>
   </div>
 
