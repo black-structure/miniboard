@@ -1,5 +1,6 @@
 module Admin::BoardsHelper
-  
+  #alias :board_path :admin_board_path
+
   def board_path(x, y=nil)
     admin_board_path(x, y)
   end

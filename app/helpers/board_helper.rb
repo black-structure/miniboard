@@ -16,12 +16,22 @@ module BoardHelper
   end
 
   def board_form_url(opts={})
-    board = (opts.include? :board) ? opts[:board] : @board
+    board = opts[:board] || @board
 
     if(!defined? @thrd)
       "/boards/#{board.name}/new"
     else
       "/boards/#{board.name}/#{@thrd.number}/new"
+    end
+  end
+
+  def board_delform_url(opts={})
+    board = opts[:board] || @board
+
+    if(!defined? @thrd)
+      "/boards/#{board.name}/delete"
+    else
+      "/boards/#{board.name}/#{@thrd.number}/delete"
     end
   end
 
