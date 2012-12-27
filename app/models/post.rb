@@ -12,7 +12,7 @@ class Post
   field :postername, type: String
   field :subject, type: String
   field :body, type: String
-  field :sage, type: Boolean, default: false
+  field :sage, type: Boolean#, default: false
   mount_uploader :file, PostImageUploader
   field :image_width, type: Integer
   field :image_height, type: Integer
@@ -21,7 +21,7 @@ class Post
  
   index({ board: 1, number: 1 }, { unique: true })
   
-  before_save :update_fileinfo
+  before_save :update_fileinfo, :optimize_fields
   
   def image
     @image ||= MiniMagick::Image.open(file.path)
@@ -32,6 +32,15 @@ class Post
       self.file_size ||= file.size
       self.image_width ||= image['width']
       self.image_height ||= image['height']
+    end
+  end
+
+  def optimize_fields
+    if !self.sage
+      self.remove_attribute(:sage)
+    end
+    if !self.password || self.password.empty?
+      self.remove_attribute(:password_hash)
     end
   end
 
