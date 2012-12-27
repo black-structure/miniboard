@@ -2,6 +2,8 @@ class Post
   include Mongoid::Document
   include Mongoid::Timestamps
   include BCrypt
+
+  attr_accessor :empty
   
   belongs_to :thrd
   belongs_to :board
@@ -16,12 +18,10 @@ class Post
   field :image_height, type: Integer
   field :file_size, type: Integer
   field :password_hash, type: String
-  attr_accessor :password
+ 
+  index({ board: 1, number: 1 }, { unique: true })
   
-  index [ [:'board.name', Mongo::ASCENDING], [:number, Mongo::ASCENDING] ], unique: true
-  
-  # before_create :update_fileinfo, :encrypt_password
-  before_save :update_fileinfo, :encrypt_password
+  before_save :update_fileinfo
   
   def image
     @image ||= MiniMagick::Image.open(file.path)
@@ -35,7 +35,18 @@ class Post
     end
   end
 
-  def encrypt_password
-    self.password_hash = Password.create(@password)
+  def password
+    if @empty
+      ""
+    else
+      @password ||= Password.new(password_hash)
+    end
+  end
+
+  def password=(new_password)
+    @password = new_password
+    if !@empty
+      self.password_hash = Password.create(new_password)
+    end
   end
 end
