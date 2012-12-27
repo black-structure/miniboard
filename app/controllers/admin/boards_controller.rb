@@ -55,8 +55,7 @@ class Admin::BoardsController < AdminController
   # PUT /admin/boards/1
   # PUT /admin/boards/1.json
   def update
-    #@board = Board.find(params[:id])
-    return
+    @board = Board.find(params[:id])
     
     fields = params[:board]
     
@@ -75,8 +74,7 @@ class Admin::BoardsController < AdminController
   # DELETE /admin/boards/1
   # DELETE /admin/boards/1.json
   def destroy
-    #@board = Board.find(params[:id])
-    return
+    @board = Board.find(params[:id])
     @board.destroy
 
     respond_to do |format|
