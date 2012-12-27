@@ -5,8 +5,16 @@ class User
   devise :database_authenticatable, :rememberable, :trackable
 
   ## Role-based authorization
-  roles :guest, :moderator, :admin
-  field :roles_mask, :default => 1 # only anonymous 'guest' by default
+  field :role_list, :type => Array
+  def roles
+    @roles ||= role_list ? role_list.map(&:to_sym) : []
+  end
+  def roles=(new_roles)
+    self.role_list= new_roles.map(&:to_s)
+  end
+  def has_role?(sym)
+    roles.include? sym
+  end
 
   ## Database authenticatable
   field :username,            :type => String, :default => ""

@@ -5,10 +5,6 @@ gem 'rails', '3.2.8'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-# gem 'factory_girl_rails'
-
-#gem 'mongoid', '~> 2.4'
-#gem 'bson_ext', '~> 1.5'
 gem "mongoid", "~> 3.0.0"
 
 gem "carrierwave-mongoid",
@@ -18,7 +14,6 @@ gem "carrierwave-mongoid",
 gem 'mini_magick'
 
 gem 'devise'
-gem 'role_model'
 gem 'cancan'
 
 gem 'simple_form'
@@ -31,7 +26,7 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  gem 'therubyracer', :platform => :ruby
+  #gem 'therubyracer', :platform => :ruby
 
   gem 'uglifier', '>= 1.0.3'
 end
