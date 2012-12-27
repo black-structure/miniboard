@@ -1,9 +1,7 @@
 class Admin::UsersController < AdminController
   load_and_authorize_resource
-  
-  def user_url(x=nil)
-    admin_user_url x
-  end
+ 
+  alias_method :user_url, :admin_user_url
   
   # GET /admin/users
   # GET /admin/users.json
@@ -19,12 +17,7 @@ class Admin::UsersController < AdminController
   # GET /admin/users/1
   # GET /admin/users/1.json
   def show
-    @user = User.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @user }
-    end
+    redirect_to :action => "edit", :id => params[:id]
   end
 
   # GET /admin/users/new

@@ -1,9 +1,7 @@
 class Admin::BoardsController < AdminController
   load_and_authorize_resource
   
-  def board_url(x=nil)
-    admin_board_url x
-  end
+  alias_method :board_url, :admin_board_url
   
   # GET /admin/boards
   # GET /admin/boards.json
@@ -19,12 +17,7 @@ class Admin::BoardsController < AdminController
   # GET /admin/boards/1
   # GET /admin/boards/1.json
   def show
-    @board = Board.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @board }
-    end
+    redirect_to :action => "edit", :id => params[:id]
   end
 
   # GET /admin/boards/new
@@ -62,7 +55,8 @@ class Admin::BoardsController < AdminController
   # PUT /admin/boards/1
   # PUT /admin/boards/1.json
   def update
-    @board = Board.find(params[:id])
+    #@board = Board.find(params[:id])
+    return
     
     fields = params[:board]
     
@@ -81,7 +75,8 @@ class Admin::BoardsController < AdminController
   # DELETE /admin/boards/1
   # DELETE /admin/boards/1.json
   def destroy
-    @board = Board.find(params[:id])
+    #@board = Board.find(params[:id])
+    return
     @board.destroy
 
     respond_to do |format|
