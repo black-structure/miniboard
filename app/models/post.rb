@@ -48,7 +48,7 @@ class Post
     if @empty
       ""
     else
-      @password ||= Password.new(password_hash)
+      @password ||= password_hash ? Password.new(password_hash) : ""
     end
   end
 
