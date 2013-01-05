@@ -1,6 +1,5 @@
 class User
   include Mongoid::Document
-  include RoleModel
   
   devise :database_authenticatable, :rememberable, :trackable
 
