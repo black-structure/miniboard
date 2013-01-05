@@ -20,9 +20,9 @@ class BoardController < ApplicationController
   def index
     @post = Post.new(empty: true)
     
-    @pager = ::Paginator.new(Thrd.count, @board.perpage) do |offset, per_page|
+    @pager = ::Paginator.new(Thrd.count, @board.perpage) do |offset, perpage|
       nodes = {}
-      @board.thrds.desc(:last_time).skip(offset).limit(per_page).each do |thrd|
+      @board.thrds.desc(:last_time).skip(offset).limit(perpage).each do |thrd|
         posts = thrd.posts.desc(:number)
         first = posts.last
         nodes[thrd.number] = {
@@ -33,32 +33,43 @@ class BoardController < ApplicationController
       nodes
     end
     
-    @page = @pager.page(params[:page])
+    page_number = params[:page]
+
+    @page = @pager.page(page_number)
     
     respond_to do |format|
       format.html
+      format.json do
+        render json: {
+                        board: @board.name,
+                        page: page_number,
+                        perpage: @board.perpage,
+                        nodes: @page.items
+                      }
+      end
     end
-    
   end
 
   def thread
     @post = Post.new(empty: true)
     
-    @thrd = @board.thrds.where(number: params[:thrd]).first
-    if !@thrd
-      raise "thread `#{params[:thrd]}` not found"
-    end
-
     @posts = @thrd.posts.asc(:number).collect{|x| x}
     @first = @posts.slice!(0)
     
     respond_to do |format|
       format.html
+      format.json do
+        render json: { 
+                        board: @board.name,
+                        thread: @thrd.number,
+                        first: @first,
+                        replies: @posts
+                      }
+      end
     end
   end
   
   def new_post
-
     fields = params[:post].clone
     fields[:number] = @board.inc_number
     fields[:board] = @board
@@ -69,7 +80,16 @@ class BoardController < ApplicationController
       @thrd.bump!(post)
     end
     
-    redirect_to board_thread_url
+    respond_to do |format|
+      format.html { redirect_to board_thread_url }
+      format.json do
+        render json: {
+                        board: @board.name,
+                        thread: @thrd.number,
+                        number: post.number
+                      }
+      end
+    end
   end
   
   def new_thread
@@ -82,7 +102,10 @@ class BoardController < ApplicationController
     @board.thrds << thrd
     thrd.bump!(@post)
     
-    redirect_to board_index_url
+    respond_to do |format|
+      format.html { redirect_to board_index_url }
+      format.json { render json: { board: @board.name, thread: @thrd.number } }
+    end
   end
 
   def delete
@@ -90,15 +113,21 @@ class BoardController < ApplicationController
       @thrd = @board.thrds.where(number: params[:thrd]).first
     end
 
+    deleted = []
+
     if params[:post_id]
       params[:post_id].each do |number|
         post = Post.where(board: @board, number: number).first
         if post && !post.password.empty? && post.password == params[:postpassword]
           post.destroy
+          deleted << { board: @board.name, number: number }
         end
       end
     end
 
-    redirect_to @thrd ? board_thread_url : board_index_url
+    respond_to do |format|
+      format.html { redirect_to @thrd ? board_thread_url : board_index_url }
+      format.json { render json: deleted }
+    end
   end
 end
