@@ -70,11 +70,11 @@ class BoardController < ApplicationController
   end
   
   def new_post
-    fields = params[:post].clone
-    fields[:number] = @board.inc_number
-    fields[:board] = @board
-    fields[:thrd] = @thrd
-    post = Post.create!(fields)
+    hash = params[:post].clone
+    hash[:number] = @board.inc_number
+    hash[:board] = @board
+    hash[:thrd] = @thrd
+    post = Post.create!(hash)
     if(!post.read_attribute(:sage))
       @thrd.bump!(post)
     end
@@ -92,10 +92,10 @@ class BoardController < ApplicationController
   end
   
   def new_thread
-    fields = params[:post].clone
-    fields[:number] = @board.inc_number
-    fields[:board] = @board
-    @post = Post.create!(fields)
+    hash = params[:post].clone
+    hash[:number] = @board.inc_number
+    hash[:board] = @board
+    @post = Post.create!(hash)
     thrd = Thrd.create!(:posts => [@post], :board => @board, :number => @post.number)
     @board.thrds << thrd
     thrd.bump!(@post)
