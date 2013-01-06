@@ -67,7 +67,6 @@ class Admin::UsersController < AdminController
     
     respond_to do |format|
       if @user.update_attributes(fields)
-        @user.save!
         format.html { redirect_to @user, notice: 'User was successfully edited.' }
         format.json { head :no_content }
       else
