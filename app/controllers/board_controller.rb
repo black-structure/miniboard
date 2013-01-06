@@ -85,7 +85,7 @@ class BoardController < ApplicationController
         render json: {
                         board: @board.name,
                         thread: @thrd.number,
-                        number: post.number
+                        post: post.number
                       }
       end
     end
@@ -118,7 +118,7 @@ class BoardController < ApplicationController
         post = Post.where(board: @board, number: number).first
         if post && !post.password.empty? && post.password == params[:postpassword]
           post.destroy
-          deleted << { board: @board.name, number: number }
+          deleted << { board: @board.name, post: number }
         end
       end
     end
