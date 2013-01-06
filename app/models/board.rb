@@ -9,6 +9,7 @@ class Board
   field :counter, type: Integer, default: 0
   field :perpage, type: Integer, default: 15
   field :maxthrds, type: Integer, default: 60
+  field :maxfilesize, type: Integer, default: 1024*1024
   
   index({ name: 1 }, { name: 'index_board_name', unique: true })
   

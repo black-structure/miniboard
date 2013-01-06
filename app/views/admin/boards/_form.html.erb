@@ -1,11 +1,12 @@
 <%= simple_form_for(@board) do |f| %>
-  <%= f.error_notification %>
-
   <div class="form-inputs">
   	<table>
   	  <tr>
   	    <td>Name</td>
-  	    <td><%= f.text_field :name %></td>
+        <td>
+          <%= f.text_field :name %>
+          <span style="color:red"><%= f.error :name, :id => 'name_error' %></span>
+        </td>
   	  </tr>
   	  <tr>
   	    <td>Description</td>
@@ -23,6 +24,10 @@
   	    <td>Max threads</td>
   	    <td><%= f.number_field :maxthrds %></td>
   	  </tr>
+      <tr>
+        <td>Max file size</td>
+        <td><%= f.text_field :maxfilesize %></td>
+      </tr>
   	</table>
   </div>
 
