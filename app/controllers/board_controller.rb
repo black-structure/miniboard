@@ -73,9 +73,8 @@ class BoardController < ApplicationController
     fields = params[:post].clone
     fields[:number] = @board.inc_number
     fields[:board] = @board
-
+    fields[:thrd] = @thrd
     post = Post.create!(fields)
-    @thrd.posts << post
     if(!post.read_attribute(:sage))
       @thrd.bump!(post)
     end
@@ -96,7 +95,6 @@ class BoardController < ApplicationController
     fields = params[:post].clone
     fields[:number] = @board.inc_number
     fields[:board] = @board
-    
     @post = Post.create!(fields)
     thrd = Thrd.create!(:posts => [@post], :board => @board, :number => @post.number)
     @board.thrds << thrd
