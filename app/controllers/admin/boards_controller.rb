@@ -61,7 +61,6 @@ class Admin::BoardsController < AdminController
     
     respond_to do |format|
       if @board.update_attributes(fields)
-        @board.save!
         format.html { redirect_to @board, notice: 'Board was successfully updated.' }
         format.json { head :no_content }
       else
