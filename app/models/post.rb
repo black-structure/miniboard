@@ -18,10 +18,17 @@ class Post
   field :image_height, type: Integer
   field :file_size, type: Integer
   field :password_hash, type: String
+
+  validate do
+    if file? && file_size > board.maxfilesize
+      errors.add :file, "Max file size is #{board.maxfilesize}"
+    end
+  end
  
   index({ board: 1, number: 1 }, { unique: true })
   
-  before_save :update_fileinfo, :optimize_fields
+  before_save :optimize_fields
+  before_validation :update_fileinfo
   
   def image
     @image ||= MiniMagick::Image.open(file.path)
