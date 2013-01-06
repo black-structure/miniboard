@@ -43,12 +43,8 @@ class Post
   end
 
   def optimize_fields
-    if !self.sage
-      self.remove_attribute(:sage)
-    end
-    if !self.password || self.password.empty?
-      self.remove_attribute(:password_hash)
-    end
+    self.remove_attribute(:sage) unless self.sage
+    self.remove_attribute(:password_hash) unless self.password && !self.password.empty?
   end
 
   def password
