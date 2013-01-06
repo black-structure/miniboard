@@ -24,6 +24,18 @@ class Post
       errors.add :file, "Max file size is #{board.maxfilesize}"
     end
   end
+
+  validate do
+    if !thrd && !file?
+      errors.add :file, "Need a picture to start a thread"
+    end
+  end
+
+  validate do
+    if thrd && (!file? && (!body || body.empty?))
+      errors.add :body, "Empty message detected"
+    end
+  end
  
   index({ board: 1, number: 1 }, { unique: true })
   
