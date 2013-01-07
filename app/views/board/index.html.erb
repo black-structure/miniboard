@@ -5,9 +5,17 @@
 <% @page.each do |n,node| %>
   <div id="thread_<%=n%>" class="postnode">
     <%= render :partial => 'postfirst', :locals => { post: node[:first] } %>
-      
+    <% if node[:omitted] > 0 %>
+      <span class="omittedposts">
+        <%= node[:omitted] %> posts
+        <% if node[:omitted_files] > 0 %>
+          and <%= node[:omitted_files] %> images
+        <% end %>
+        omitted
+      </span>
+    <% end %>
     <% node[:replies].each do |post| %>
-    <%= render :partial => 'post', :locals => { post: post } %>
+      <%= render :partial => 'post', :locals => { post: post } %>
     <% end %>
   </div>
   <br clear="left">

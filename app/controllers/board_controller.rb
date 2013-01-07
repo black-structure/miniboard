@@ -20,14 +20,21 @@ class BoardController < ApplicationController
   def index
     @post = Post.new(empty: true)
     
-    @pager = ::Paginator.new(Thrd.count, @board.perpage) do |offset, perpage|
+    @pager = ::Paginator.new(@board.thrds.length, @board.perpage) do |offset, perpage|
       nodes = {}
       @board.thrds.desc(:last_time).skip(offset).limit(perpage).each do |thrd|
         posts = thrd.posts.desc(:number)
         first = posts.last
+        count = thrd.count
+        replies = posts.limit(@board.replies_on_index).to_a.reverse.drop_while{|post| post==first}
+        omitted = count - replies.length - 1
+        omitted_files = thrd.count_files - replies.count{ |post| post.file? } - (first.file? ? 1 : 0)
+
         nodes[thrd.number] = {
           first: first,
-          replies: posts.limit(5).to_a.reverse.drop_while{|post| post==first}
+          omitted: omitted,
+          omitted_files: omitted_files,
+          replies: replies 
           }
       end
       nodes
@@ -71,13 +78,14 @@ class BoardController < ApplicationController
   
   def new_post
     hash = params[:post].clone
-    hash[:number] = @board.inc_number
+    hash[:number] = @board.inc_number!
     hash[:board] = @board
     hash[:thrd] = @thrd
     post = Post.create!(hash)
     if(!post.read_attribute(:sage))
       @thrd.bump!(post)
     end
+    @thrd.update_counters!(post)
     
     respond_to do |format|
       format.html { redirect_to board_thread_url }
@@ -93,10 +101,10 @@ class BoardController < ApplicationController
   
   def new_thread
     hash = params[:post].clone
-    hash[:number] = @board.inc_number
+    hash[:number] = @board.inc_number!
     hash[:board] = @board
     @post = Post.create!(hash)
-    thrd = Thrd.create!(:posts => [@post], :board => @board, :number => @post.number)
+    thrd = Thrd.create!(posts: [@post], board: @board, number: @post.number, count: 1, count_files: (@post.file? ? 1 : 0))
     @board.thrds << thrd
     thrd.bump!(@post)
     
