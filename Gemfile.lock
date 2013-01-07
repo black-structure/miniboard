@@ -1,13 +1,3 @@
-GIT
-  remote: git://github.com/jnicklas/carrierwave-mongoid.git
-  revision: fb61fb90a9512618ec21e13ad823485933e6293b
-  branch: mongoid-3.0
-  specs:
-    carrierwave-mongoid (0.3.0.alpha)
-      carrierwave (~> 0.6)
-      mongoid (~> 3.0.0)
-      mongoid-grid_fs (~> 1.3.1)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -46,6 +36,10 @@ GEM
     carrierwave (0.7.1)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
+    carrierwave-mongoid (0.3.0)
+      carrierwave (~> 0.7.1)
+      mongoid (~> 3.0)
+      mongoid-grid_fs (~> 1.3)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -82,7 +76,7 @@ GEM
       moped (~> 1.1)
       origin (~> 1.0)
       tzinfo (~> 0.3.22)
-    mongoid-grid_fs (1.3.3)
+    mongoid-grid_fs (1.7.0)
       mime-types (~> 1.19)
       mongoid (~> 3.0)
     moped (1.3.2)
@@ -148,7 +142,7 @@ PLATFORMS
 
 DEPENDENCIES
   cancan
-  carrierwave-mongoid!
+  carrierwave-mongoid
   coffee-rails (~> 3.2.1)
   devise
   jquery-rails

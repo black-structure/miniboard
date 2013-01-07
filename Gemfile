@@ -7,10 +7,7 @@ gem 'rails', '3.2.8'
 
 gem "mongoid", "~> 3.0.0"
 
-gem "carrierwave-mongoid",
-  :git => "git://github.com/jnicklas/carrierwave-mongoid.git", :branch => "mongoid-3.0",
-  :require => 'carrierwave/mongoid'
-#gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
+gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
 gem 'mini_magick'
 
 gem 'devise'
