@@ -3,14 +3,15 @@
 <%= render 'form' %>
 <hr>
 <% @page.each do |n,node| %>
-<div id="thread_<%=n%>" class="postnode">
-  <%= render :partial => 'postfirst', :locals => { post: node[:first] } %>
-  	
-  <% node[:replies].each do |post| %>
-  <%= render :partial => 'post', :locals => { post: post } %>
-  <% end %>
-</div>
-<hr>
+  <div id="thread_<%=n%>" class="postnode">
+    <%= render :partial => 'postfirst', :locals => { post: node[:first] } %>
+      
+    <% node[:replies].each do |post| %>
+    <%= render :partial => 'post', :locals => { post: post } %>
+    <% end %>
+  </div>
+  <br clear="left">
+  <hr>
 <% end %>
 
 <% if @page.prev? %>
