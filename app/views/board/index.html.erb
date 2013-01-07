@@ -7,9 +7,9 @@
     <%= render :partial => 'postfirst', :locals => { post: node[:first] } %>
     <% if node[:omitted] > 0 %>
       <span class="omittedposts">
-        <%= node[:omitted] %> posts
+        <%= pluralize(node[:omitted], 'post') %>
         <% if node[:omitted_files] > 0 %>
-          and <%= node[:omitted_files] %> images
+          and <%= pluralize(node[:omitted_files], 'image') %>
         <% end %>
         omitted
       </span>
