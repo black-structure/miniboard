@@ -23,7 +23,7 @@ class Board
     errors.add(:maxfilesize, 'This field allows only positive values') unless board.maxfilesize >= 1
   end
   
-  def inc_number
+  def inc_number!
     inc(:counter, 1)
     counter
   end
