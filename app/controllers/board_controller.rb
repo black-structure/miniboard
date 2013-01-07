@@ -23,11 +23,11 @@ class BoardController < ApplicationController
     @pager = ::Paginator.new(Thrd.count, @board.perpage) do |offset, perpage|
       nodes = {}
       @board.thrds.desc(:last_time).skip(offset).limit(perpage).each do |thrd|
-        posts = thrd.posts.desc(:number).limit(5)
+        posts = thrd.posts.desc(:number)
         first = posts.last
         nodes[thrd.number] = {
           first: first,
-          replies: posts.to_a.reverse.drop_while{|x| first.id==x.id}
+          replies: posts.limit(5).to_a.reverse.drop_while{|x| first.id==x.id}
           }
       end
       nodes
