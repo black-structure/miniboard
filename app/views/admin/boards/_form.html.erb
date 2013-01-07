@@ -18,15 +18,31 @@
   	  </tr>
   	  <tr>
   	    <td>Threads per page</td>
-  	    <td><%= f.number_field :perpage %></td>
+        <td>
+          <%= f.number_field :perpage %>
+          <span style="color:red"><%= f.error :perpage %></span>
+        </td>
   	  </tr>
+      <tr>
+        <td>Replies per thread on index page</td>
+        <td>
+          <%= f.number_field :replies_on_index %>
+          <span style="color:red"><%= f.error :replies_on_index %></span>
+        </td>
+      </tr>
   	  <tr>
   	    <td>Max threads</td>
-  	    <td><%= f.number_field :maxthrds %></td>
+        <td>
+          <%= f.number_field :maxthrds %>
+          <span style="color:red"><%= f.error :maxthrds %></span>
+        </td>
   	  </tr>
       <tr>
         <td>Max file size</td>
-        <td><%= f.text_field :maxfilesize %></td>
+        <td>
+          <%= f.text_field :maxfilesize %>
+          <span style="color:red"><%= f.error :maxfilesize %></span>
+        </td>
       </tr>
   	</table>
   </div>
