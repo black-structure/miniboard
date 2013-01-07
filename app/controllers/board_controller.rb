@@ -27,7 +27,7 @@ class BoardController < ApplicationController
         first = posts.last
         nodes[thrd.number] = {
           first: first,
-          replies: posts.limit(5).to_a.reverse.drop_while{|x| first.id==x.id}
+          replies: posts.limit(5).to_a.reverse.drop_while{|post| post==first}
           }
       end
       nodes
