@@ -8,9 +8,7 @@ class BoardController < ApplicationController
 
   def init_thrd
     @thrd = @board.thrds.where(number: params[:thrd]).first
-    if !@thrd
-      raise "thread `#{params[:thrd]}` not found"
-    end
+    raise "thread `#{params[:thrd]}` not found" unless @thrd
   end
   
   public
