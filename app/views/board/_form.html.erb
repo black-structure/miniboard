@@ -16,6 +16,13 @@
         <td><%= f.text_field :subject %> <%= f.submit 'Send' %></td>
       </tr>
       <tr>
+        <td></td>
+        <td>
+          <%= button_tag 'B', :type => :button, :id => 'button_set_bold' %>
+          <%= button_tag 'I', :type => :button, :id => 'button_set_cursive' %>
+          <%= button_tag '', :type => :button, :id => 'button_set_spoiler' %>
+        </td>
+      <tr>
         <td class="postblock">Message</td> 
         <td><%= f.text_area :body %></td>
       </tr>
