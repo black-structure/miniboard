@@ -15,10 +15,10 @@ module BoardHelper
     board_thread_url(thrd: post.thrd) + '#i' + post.number.to_s
   end
 
-  def board_post_url(post)
+  def board_post_url(opts)
     board = opts[:board] || @board
-    thrd = opts[:thrd] || @thrd
     post = opts[:post] || @post
+    thrd = post.thrd
     "/boards/#{board.name}/#{thrd.number}/#{post.number}"
   end
 
