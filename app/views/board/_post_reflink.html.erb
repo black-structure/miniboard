@@ -1,4 +1,4 @@
 <span class="reflink">
-  <%=link_to(' No. ', board_post_url(post), :class => 'reflink_n')%>
-  <%=link_to(post.number, board_post_url_i(post), :class => 'reflink_i')%>
+  <%=link_to(' No. ', board_reflink_url(post), :class => 'reflink_n')%>
+  <%=link_to(post.number, board_reflink_url_i(post), :class => 'reflink_i')%>
 </span>
