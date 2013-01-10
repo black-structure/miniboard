@@ -1,6 +1,6 @@
 module BoardHelper
   def board_thread_number
-    if(defined? @thrd)
+    if @thrd
       @thrd.number.to_s
     else
       ''
@@ -18,7 +18,7 @@ module BoardHelper
   def board_form_url(opts={})
     board = opts[:board] || @board
 
-    if(!defined? @thrd)
+    unless @thrd
       "/boards/#{board.name}/new"
     else
       "/boards/#{board.name}/#{@thrd.number}/new"
@@ -28,7 +28,7 @@ module BoardHelper
   def board_delform_url(opts={})
     board = opts[:board] || @board
 
-    if(!defined? @thrd)
+    unless @thrd
       "/boards/#{board.name}/delete"
     else
       "/boards/#{board.name}/#{@thrd.number}/delete"
