@@ -18,11 +18,9 @@ class ApplicationController < ActionController::Base
   
   def board_thread_url(opts={})
     board = (opts.include? :board) ? opts[:board] : @board
-
-    if(opts.include? :thrd)
-      "/boards/#{board.name}/#{opts[:thrd].number}"
-    elsif(defined? @thrd)
-      "/boards/#{board.name}/#{@thrd.number}"
+    thrd = opts[:thrd] || @thrd
+    if thrd
+      "/boards/#{board.name}/#{thrd.number}"
     else
       # TODO: raise exception
       "/boards/#{board.name}"
