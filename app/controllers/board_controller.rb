@@ -1,6 +1,6 @@
 class BoardController < ApplicationController
   before_filter :init_board
-  before_filter :init_thrd, :only => [:thread, :new_post]
+  before_filter :init_thrd, :only => [:thread, :post, :new_post]
   
   def init_board
     @board = Board.where(name: params[:board]).first
@@ -71,6 +71,13 @@ class BoardController < ApplicationController
                         replies: @posts
                       }
       end
+    end
+  end
+
+  def post
+    @post = Post.where(board: @board, number: number).first
+    respond_to do |format|
+      format.json { render json: @post }
     end
   end
   
