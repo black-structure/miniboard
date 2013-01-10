@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
   end
   
   def board_thread_url(opts={})
-    board = (opts.include? :board) ? opts[:board] : @board
+    board = opts[:board] || @board
     thrd = opts[:thrd] || @thrd
     if thrd
       "/boards/#{board.name}/#{thrd.number}"
