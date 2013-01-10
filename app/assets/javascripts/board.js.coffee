@@ -13,7 +13,7 @@ class _ImageBoard
       @ready()
   ready: ->
     @process_buttons()
-    # @process_reflinks()
+    @process_reflinks()
 
   process_buttons: ->
     $('#button_set_bold').click (e) =>
@@ -27,7 +27,11 @@ class _ImageBoard
       e.preventDefault()
 
   process_reflinks: ->
-    alert 'not implemented'
+    $('.reflink_i').each (i,obj) =>
+      text = ">>" + obj.hash.substring(2)
+      $(obj).click (e) =>
+        @append_to_post_body text
+        e.preventDefault()
 
   append_to_post_body: (text) ->
     $('#post_body').val($('#post_body').val() + text)
