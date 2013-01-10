@@ -15,6 +15,17 @@ module BoardHelper
     board_thread_url(thrd: post.thrd) + '#i' + post.number.to_s
   end
 
+  def board_post_url(post)
+    board = opts[:board] || @board
+    thrd = opts[:thrd] || @thrd
+    post = opts[:post] || @post
+    "/boards/#{board.name}/#{thrd.number}/#{post.number}"
+  end
+
+  def board_post_url_json(post)
+    board_post_url(post) + '.json'
+  end
+
   def board_form_url(opts={})
     board = opts[:board] || @board
 
