@@ -55,7 +55,7 @@ class BoardController < ApplicationController
     end
   end
 
-  def get_thread
+  def thread
     @post = Post.new(empty: true)
     
     @posts = @thrd.posts.asc(:number).collect{|x| x}
@@ -74,7 +74,7 @@ class BoardController < ApplicationController
     end
   end
 
-  def get_post
+  def post
     @post = Post.where(board: @board, number: number).first
     respond_to do |format|
       format.json { render json: @post }
