@@ -39,4 +39,30 @@ module BoardHelper
     name = if !post.postername.empty? then post.postername else post.board.postername_default end
     if post.sage then link_to(name, 'mailto:sage') else name end
   end
+
+  def markup(text)
+    replaces = {
+                  '\*\*' => [ '<b>', '</b>' ],
+                  '\*' => [ '<i>', '</i>' ],
+                  '%%' => [ '<span class="spoiler">', '</span>' ]
+                }
+    replaces.each do |m,x|
+      s,e = x
+      text = text.gsub /#{m}(.*?)#{m}/, "#{s}\\1#{e}"
+    end
+    return text
+  end
+
+  def quotelinks(text)
+    text.gsub /&gt;&gt;(\d+)/, "<a class=\"quotelink\" href=\"#\\1\">&gt;&gt;\\1</a>"
+  end
+
+  def process_body(text)
+    text = h(text)
+    text = quotelinks(markup(text))
+    ["\r\n", "\n\r", "\n"].each do |s|
+      text = text.gsub(s, '<br />')
+    end
+    return text.html_safe
+  end
 end

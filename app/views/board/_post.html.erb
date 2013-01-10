@@ -11,7 +11,7 @@
             <br><%= render :partial => 'post_thumb', :locals => { post: post } %>
           <% end %>
           <blockquote>
-            <%= content_tag(:div, post.body, :class => 'postmessage')%>
+            <%= content_tag(:div, process_body(post.body), :class => 'postmessage')%>
           </blockquote>
         </td>
   	  </tr>
