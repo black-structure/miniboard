@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   protected
   
   def board_index_url(opts={})
-    board = (opts.include? :board) ? opts[:board] : @board
+    board = opts[:board] || @board
 
     if(opts.include? :page)
       "/boards/#{board.name}/page#{opts[:page]}"
