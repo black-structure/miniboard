@@ -75,7 +75,7 @@ class BoardController < ApplicationController
   end
 
   def post
-    @post = Post.where(board: @board, number: number).first
+    @post = Post.where(board: @board, number: params[:post]).first
     respond_to do |format|
       format.json { render json: @post }
     end
