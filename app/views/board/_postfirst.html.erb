@@ -1,4 +1,4 @@
-<div class="postnode">
+<%= content_tag :div, class: 'postnode', id: "postnode#{post.number}" do -%>
   <% if post.file? %>
     <%= render :partial => 'post_filesize', :locals => { post: post } %><br>
     <%= render :partial => 'post_thumb', :locals => { post: post } %>
@@ -13,4 +13,4 @@
   <blockquote>
     <%= content_tag(:div, post.body, :class => 'postmessage')%>
   </blockquote>
-</div>
+<% end %>
