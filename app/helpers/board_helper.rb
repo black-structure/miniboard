@@ -46,6 +46,16 @@ module BoardHelper
     end
   end
 
+  def postnode(post, is_first=false)
+    content_tag :div, class: 'postnode', id: "postnode#{post.number}" do
+      if is_first
+        render :partial => 'postfirst', :locals => { post: post }
+      else
+        render :partial => 'post', :locals => { post: post }
+      end
+    end
+  end
+
   def postername(post)
     name = if !post.postername.empty? then post.postername else post.board.postername_default end
     if post.sage then link_to(name, 'mailto:sage') else name end

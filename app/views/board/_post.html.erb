@@ -1,20 +1,18 @@
-<%= content_tag :div, class: 'postnode', id: "postnode#{post.number}" do -%>
-  <table>
-    <tbody>
-  	  <tr>
-        <td class="doubledash"> &gt;&gt; </td>
-        <td class="reply" id="reply<%=post.number%>">
-          <%= render :partial => 'post_label', :locals => { post: post } %>
-          <%= render :partial => 'post_reflink', :locals => { post: post } %>
-          <% if post.file? %>
-            <br><%= render :partial => 'post_filesize', :locals => { post: post } %>
-            <br><%= render :partial => 'post_thumb', :locals => { post: post } %>
-          <% end %>
-          <blockquote>
-            <%= content_tag(:div, process_body(post.body), :class => 'postmessage')%>
-          </blockquote>
-        </td>
-  	  </tr>
-    </tbody>
-  </table>
-<% end %>
+<table>
+  <tbody>
+    <tr>
+      <td class="doubledash"> &gt;&gt; </td>
+      <td class="reply" id="reply<%=post.number%>">
+        <%= render :partial => 'post_label', :locals => { post: post } %>
+        <%= render :partial => 'post_reflink', :locals => { post: post } %>
+        <% if post.file? %>
+          <br><%= render :partial => 'post_filesize', :locals => { post: post } %>
+          <br><%= render :partial => 'post_thumb', :locals => { post: post } %>
+        <% end %>
+        <blockquote>
+          <%= content_tag(:div, process_body(post.body), :class => 'postmessage')%>
+        </blockquote>
+      </td>
+    </tr>
+  </tbody>
+</table>

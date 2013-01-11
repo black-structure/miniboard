@@ -5,8 +5,10 @@
 <%= render 'form' %>
 <hr>
 <%= form_tag(board_delform_url, :method => :delete) do %>
-  <%= render :partial => 'postfirst', :locals => { post: @first } %>
-  <%= @posts.map{|post| render :partial => 'post', :locals => { post: post } }.join.html_safe %>
+  <%= postnode @first, true %>
+  <% @posts.each do |post| %> 
+    <%= postnode post %>
+  <% end %>
   <br clear="left">
   <hr>
   <table class="userdelete">
