@@ -21,6 +21,7 @@ Miniboard::Application.routes.draw do
   match 'boards/:board(/page:page)' => 'board#index', :constraints => { board: regex_board, page: regex_num }
   match 'boards/:board/:thrd' => 'board#thread', :constraints => { board: regex_board, thrd: regex_num }
   match 'boards/:board/:thrd/:post' => 'board#post', :constraints => { board: regex_board, thrd: regex_num, post: regex_num }
+  match 'boards/:board/post/:post' => 'board#post', :constraints => { board: regex_board, post: regex_num }
   
   match 'boards/:board/new' => 'board#new_thread', :constraints => { :board => regex_board }
   match 'boards/:board/:thrd/new' => 'board#new_post', :constraints => { :board => regex_board, :thrd => regex_num }
