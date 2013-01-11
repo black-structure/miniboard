@@ -6,7 +6,7 @@
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
   <script>
-    board = ImageBoard.get()
+    board = ImageBoard.get('<%= @board.name %>', <%= @thrd ? "'#{@thrd.number}'" : 'undefined' %>)
     board.init()
   </script>
 </head>
