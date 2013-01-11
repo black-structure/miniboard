@@ -7,8 +7,10 @@ class BoardController < ApplicationController
   end
 
   def init_thrd
-    @thrd = @board.thrds.where(number: params[:thrd]).first
-    raise "thread `#{params[:thrd]}` not found" unless @thrd
+    if params[:thrd]
+      @thrd = @board.thrds.where(number: params[:thrd]).first
+      raise "thread `#{params[:thrd]}` not found" unless @thrd
+    end
   end
   
   public
@@ -77,6 +79,7 @@ class BoardController < ApplicationController
   def post
     @post = Post.where(board: @board, number: params[:post]).first
     respond_to do |format|
+      format.html { render layout: false }
       format.json { render json: @post }
     end
   end
